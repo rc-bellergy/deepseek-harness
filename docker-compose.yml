@@ -1,0 +1,24 @@
+# Builds and auto-runs the DeepSeek Harness Web profile on http://localhost:${DSH_WEB_PORT:-3080}.
+# Put DEEPSEEK_API_KEY (and optional DEEPSEEK_BASE_URL) in a root .env file for real model calls.
+services:
+  dsh-web:
+    build:
+      context: .
+      args:
+        DSH_CLIENT_COMMIT_HASH: ${DSH_CLIENT_COMMIT_HASH:-0000000}
+    image: deepseek-harness/web
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    ports:
+      - "${DSH_WEB_PORT:-3080}:3080"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DSH_HOME: /data
+    volumes:
+      - dsh-home:/data
+
+volumes:
+  dsh-home:

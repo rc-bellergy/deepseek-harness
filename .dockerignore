@@ -1,0 +1,14 @@
+.git
+.gitignore
+.github
+node_modules
+**/node_modules
+**/lib
+**/dist
+**/coverage
+**/*.tsbuildinfo
+.dsh-build
+.pnpm-store
+.DS_Store
+.vscode
+.idea
